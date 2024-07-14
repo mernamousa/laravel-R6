@@ -2,12 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
+/* 
 Route::prefix('accounts')->group(function () {
     Route::get('/admin', function () {
         return 'welcome admin';
@@ -50,8 +48,28 @@ Route::prefix('cars')->group(function () {
     
 });
 
+ */
 
+/*  Route::fallback(function(){
+    return redirect("/");
 
+ }); */
+
+ Route::get('link', function () {
+    $url =route('w');
+    return "<a href='$url'>go to welcome</a>";
+});
+
+Route::get('welcome', function () {
+    return view('welcome');
+})->name('w');
+
+Route::get('login', function () {
+    return view('login');
+});
+Route::post('hi', function () {
+    return 'hello';
+})->name('hello');
 
 
 
