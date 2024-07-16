@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//use Illuminate\Http\Request;
+use App\Http\Controllers\LoginController;
 
 
 
@@ -55,21 +57,23 @@ Route::prefix('cars')->group(function () {
 
  }); */
 
- Route::get('link', function () {
+/*  Route::get('link', function () {
     $url =route('w');
     return "<a href='$url'>go to welcome</a>";
 });
 
 Route::get('welcome', function () {
     return view('welcome');
-})->name('w');
+})->name('w'); */
 
 Route::get('login', function () {
-    return view('login');
+    return view('loginTask');
 });
-Route::post('hi', function () {
-    return 'hello';
-})->name('hello');
+       
+
+Route::post('hi',[LoginController::class,'login']
+    // $data = $request->input('data');
+)->name('hello');
 
 
 
