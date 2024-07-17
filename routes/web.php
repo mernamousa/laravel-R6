@@ -71,8 +71,6 @@ Route::get('login', function () {
 });
        
 
-
-
 Route::post('hi',[LoginController::class,'login']
     // $data = $request->input('data');
 )->name('hello');
