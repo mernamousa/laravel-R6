@@ -66,9 +66,8 @@ Route::get('welcome', function () {
     return view('welcome');
 })->name('w'); */
 
-Route::get('login', function () {
-    return view('loginTask');
-});
+Route::get('contact', [LoginController::class,'contact']);
+
        
 
 Route::post('hi',[LoginController::class,'login']
