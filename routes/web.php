@@ -75,6 +75,8 @@ Route::post('hi',[LoginController::class,'login']
     // $data = $request->input('data');
 )->name('hello');
 
+
+
 Route::get('cars/create', [CarController::class,'create'])->name('cars.create');
 Route::post('cars/store', [CarController::class,'store'])->name('cars.store');
 
