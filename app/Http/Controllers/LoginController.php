@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function contact(){
+        return view('loginTask');
+    }
+    
     public function login(Request $request)
     {
         $name=$request->name;
