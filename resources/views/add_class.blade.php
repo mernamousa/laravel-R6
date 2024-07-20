@@ -47,13 +47,13 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
-              <input type="time" step="0.1" placeholder="Time From" class="form-control py-2" name="timeFrom"/>
+              <input type="time"  placeholder="Time From" class="form-control py-2" name="timeFrom"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
-              <input type="time" step="0.1" placeholder="Time To" class="form-control py-2" name="timeTo"/>
+              <input type="time"  placeholder="Time To" class="form-control py-2" name="timeTo"/>
             </div>
           </div>
           
