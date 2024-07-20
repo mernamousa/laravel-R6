@@ -1,78 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//use Illuminate\Http\Request;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassController;
 
-
-
-
-/* 
-Route::prefix('accounts')->group(function () {
-    Route::get('/admin', function () {
-        return 'welcome admin';
-    });
-
-    Route::get('/user', function () {
-        return 'welcome user';
-    });
-});
 
 Route::prefix('cars')->group(function () {
-
-    Route::prefix('usa')->group(function () {
-        Route::get('ford', function () {
-            return 'your car is ford And made in usa';
-        });
-        
-        Route::get('tesla', function () {
-            return 'your car is tesla And made in usa';
-        });
-
-    
-    });
-
-    Route::prefix('ger')->group(function () {
-        Route::get('mercedes', function () {
-            return 'your car is made in Germany - its name is Mercedes';
-        });
-        
-        Route::get('audi', function () {
-            return 'your car is made in Germany - its name is audi';
-        });
-        
-        Route::get('volkswagen', function () {
-            return 'your car is made in Germany - its name is volkswagen';
-        });
-    });
-    
-
-    
+Route::get('create', [CarController::class,'create'])->name('cars.create');
+Route::post('store', [CarController::class,'store'])->name('cars.store');
 });
 
- */
+Route::prefix('class')->group(function () {
+Route::get('create', [ClassController::class,'create'])->name('class.create');
+Route::post('store', [ClassController::class,'store'])->name('class.store');
 
-/*  Route::fallback(function(){
-    return redirect("/");
-
- }); */
-
-/*  Route::get('link', function () {
-    $url =route('w');
-    return "<a href='$url'>go to welcome</a>";
 });
-
-Route::get('welcome', function () {
-    return view('welcome');
-})->name('w'); */
-
-Route::get('contact', [LoginController::class,'contact']);
-
-       
-
-Route::post('hi',[LoginController::class,'login']
-    // $data = $request->input('data');
-)->name('hello');
 
 
 
