@@ -11,7 +11,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = ClassModel::get();
+        return view('classes', compact('classes'));
     }
 
     /**
@@ -27,39 +28,17 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
-       /* ClassModel::create([        
-            'className'=>$request->className,
-            'capacity'=>$request->capacity,
-            'isFulled'=>$request->isFulled,
-            'price'=>$request->price,
-            'timeFrom'=>$request->timeFrom,
-            'timeTo'=>$request->timeTo,     
-            ]); */
-        // ClassModel::create([$request->except('_token')]);
-       // $timeFrom =date('H:i:s' , strtotime($request->timeFrom));
-       // $timeTo =date('H:i:s' , strtotime($request->timeTo));
-        //$isFulled=$request->isFulled;
-       $className=$request->className;
-        $capacity=$request->capacity;
-        if(isset($request['isFulled'])){
-            $isFulled =1;
-        }else{
-            $isFulled = 0;
-        }
-        $price =$request->price;
-        $timeFrom =$request->timeFrom;
-        $timeTo =$request->timeTo;
-        ClassModel::create([
-            'className'=>$className,
-            'capacity'=>$capacity,
-            'isFulled'=>$isFulled,
-            'price'=>$price,
-            'timeFrom'=>$timeFrom,
-            'timeTo'=>$timeTo, 
-       ]);  
-            return "data inserted sucessfully"; 
+        $data =[
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'price' => $request->price,
+            'timeFrom'=> $request->timeFrom ,
+            'timeTo'=> $request->timeTo ,
+            'isFulled'=> $request->has('isFulled'),
+         ];
+
+        ClassModel::create($data);
+        return "data inserted sucessfully"; 
         
     }
 
@@ -76,7 +55,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class = ClassModel::findOrFail($id);
+        return view('edit_class', compact('class'));
     }
 
     /**
