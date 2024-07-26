@@ -38,7 +38,7 @@ class ClassController extends Controller
          ];
 
         ClassModel::create($data);
-        return "data inserted sucessfully"; 
+        return redirect()->route('class.index'); 
         
     }
 
@@ -47,7 +47,8 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $class = ClassModel::findOrFail($id);
+        return view('class_details', compact('class'));
     }
 
     /**
@@ -64,7 +65,19 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data =[
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'price' => $request->price,
+            'timeFrom'=> $request->timeFrom ,
+            'timeTo'=> $request->timeTo ,
+            'isFulled'=> $request->has('isFulled'),
+  
+         ];
+    
+         ClassModel::where('id',$id)->update($data);
+    
+         return redirect()->route('class.index');
     }
 
     /**
@@ -72,6 +85,14 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        ClassModel::where('id', $id)->delete();
+        return redirect()->route('class.index');
     }
+
+    public function showDeleted()
+    {
+        $classes = ClassModel::onlyTrashed()->get();
+        return view('trashed_classes', compact('classes'));
+    }
+
 }

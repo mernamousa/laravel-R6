@@ -29,12 +29,14 @@
           <thead>
             <tr class="table-dark">
               <th scope="col">Class Title</th>
+              <th scope="col">Capacity</th>
               <th scope="col">Price</th>
-              <th scope="col">capacity</th>
               <th scope="col">timeFrom</th>
               <th scope="col">timeTo</th>
               <th scope="col">isFulled</th>
               <th scope="col">Edit</th>
+              <th scope="col">Show</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +49,8 @@
                 <td>{{$class['timeTo']}}</td>
                 <td>{{($class['isFulled']=== 1) ? "yes" : "no"}}</td>
                 <td><a href="{{route('class.edit', $class['id'])}}">Edit</a></td>
+                <td><a href="{{route('class.show', $class['id'])}}">show</a></td>
+                <td><a href="{{route('class.destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
               </tr>
             @endforeach
             

@@ -21,10 +21,10 @@ Route::get('create', [ClassController::class,'create'])->name('class.create');
 Route::post('store', [ClassController::class,'store'])->name('class.store');
 Route::get('index', [ClassController::class,'index'])->name('class.index');
 Route::get('edit/{id}', [ClassController::class,'edit'])->name('class.edit');
-//Route::put('update/{id}', [ClassController::class,'update'])->name('class.update');
-//Route::get('show/{id}', [ClassController::class,'show'])->name('cars.show');
-//Route::get('delete/{id}', [ClassController::class,'destroy'])->name('cars.destroy');
-//Route::get('showDeleted', [ClassController::class,'showDeleted'])->name('cars.showDeleted');
+Route::put('update/{id}', [ClassController::class,'update'])->name('class.update');
+Route::get('show/{id}', [ClassController::class,'show'])->name('class.show');
+Route::get('delete/{id}', [ClassController::class,'destroy'])->name('class.destroy');
+Route::get('showDeleted', [ClassController::class,'showDeleted'])->name('class.showDeleted');
 
 
 });
