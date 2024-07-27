@@ -94,5 +94,10 @@ class ClassController extends Controller
         $classes = ClassModel::onlyTrashed()->get();
         return view('trashed_classes', compact('classes'));
     }
+    public function destroyForm(string $id)
+    {
+        ClassModel::where('id', $id)->delete();
+        return redirect()->route('class.index');
+    }
 
 }
