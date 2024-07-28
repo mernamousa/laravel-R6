@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CarController extends Controller
 {
@@ -52,7 +53,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('car_details', compact('car'));
     }
 
     /**
@@ -69,7 +71,18 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data =[
+            'carTitle' => $request->carTitle,
+            'price' => $request->price,
+            'description'=> $request->description ,
+            'published'=> $request->has('published'),
+           // 'published'=> isset($request->published),
+  
+         ];
+    
+            Car::where('id',$id)->update($data);
+    
+            return "data updated sucessfully";
     }
 
     /**
@@ -77,6 +90,14 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Car::where('id', $id)->delete();
+        return redirect()->route('cars.index');
     }
+
+    public function showDeleted()
+    {
+        $cars = Car::onlyTrashed()->get();
+        return view('trashed_cars', compact('cars'));
+    }
+
 }
