@@ -34,7 +34,8 @@
               <th scope="col">timeFrom</th>
               <th scope="col">timeTo</th>
               <th scope="col">isFulled</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Restore</th>
+              <th scope="col">Perment Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +47,20 @@
                 <td>{{$class['timeFrom']}}</td>
                 <td>{{$class['timeTo']}}</td>
                 <td>{{($class['isFulled']=== 1) ? "yes" : "no"}}</td>
-                <td><a href="{{route('class.destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+                <td>
+                  <form action={{route('class.restore', $class['id'])}} method="post">
+                    @csrf
+                    @method('patch')
+                    <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+                  </form>
+                </td>
+                <td>
+                  <form action={{route('class.forceDelete', $class['id'])}} method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-link m-0 p-0" onclick="confirm('Are you sure you want to delete?')">Perment Delete</button>
+                  </form>
+                </td>
               </tr>
             @endforeach
             

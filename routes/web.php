@@ -28,7 +28,8 @@ Route::get('show/{id}', [ClassController::class,'show'])->name('class.show');
 Route::get('delete/{id}', [ClassController::class,'destroy'])->name('class.destroy');
 Route::get('showDeleted', [ClassController::class,'showDeleted'])->name('class.showDeleted');
 Route::delete("delete/{id}", [ClassController::class,"destroyForm"])->name('delete.form');
-
+Route::patch('restore/{id}', [ClassController::class,'restore'])->name('class.restore');
+Route::delete('forceDelete/{id}', [ClassController::class,'forceDelete'])->name('class.forceDelete');
 
 });
 

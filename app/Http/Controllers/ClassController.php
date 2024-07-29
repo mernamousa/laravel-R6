@@ -28,14 +28,14 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $data =[
-            'className' => $request->className,
-            'capacity' => $request->capacity,
-            'price' => $request->price,
-            'timeFrom'=> $request->timeFrom ,
-            'timeTo'=> $request->timeTo ,
-            'isFulled'=> $request->has('isFulled'),
-         ];
+        $data =$request->validate([
+            'className' =>'required|string|max:255',
+            'capacity' =>'required|numeric',
+            'price' =>'required|decimal:1',
+            'timeFrom' =>'required',
+            'timeTo'=>'required',
+          ]);
+          $data['isFulled']=$request->has('isFulled');
 
         ClassModel::create($data);
         return redirect()->route('class.index'); 
@@ -65,15 +65,14 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data =[
-            'className' => $request->className,
-            'capacity' => $request->capacity,
-            'price' => $request->price,
-            'timeFrom'=> $request->timeFrom ,
-            'timeTo'=> $request->timeTo ,
-            'isFulled'=> $request->has('isFulled'),
-  
-         ];
+        $data =$request->validate([
+            'className' =>'required|string|max:255',
+            'capacity' =>'required|numeric',
+            'price' =>'required|decimal:1',
+            'timeFrom' =>'required',
+            'timeTo'=>'required',
+          ]);
+          $data['isFulled']=$request->has('isFulled');
     
          ClassModel::where('id',$id)->update($data);
     
@@ -98,6 +97,18 @@ class ClassController extends Controller
     {
         ClassModel::where('id', $id)->delete();
         return redirect()->route('class.index');
+    }
+
+    public function restore(string $id)
+    {
+        ClassModel::where('id', $id)->restore();
+        return redirect()->route('class.index');
+    }
+
+    public function forceDelete(string $id)
+    {
+        ClassModel::where('id', $id)->forceDelete();
+        return redirect()->route('class.showDeleted');
     }
 
 }
