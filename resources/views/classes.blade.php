@@ -37,6 +37,7 @@
               <th scope="col">Edit</th>
               <th scope="col">Show</th>
               <th scope="col">Delete</th>
+              <th scope="col">DeleteofForm</th>
             </tr>
           </thead>
           <tbody>
@@ -50,7 +51,16 @@
                 <td>{{($class['isFulled']=== 1) ? "yes" : "no"}}</td>
                 <td><a href="{{route('class.edit', $class['id'])}}">Edit</a></td>
                 <td><a href="{{route('class.show', $class['id'])}}">show</a></td>
-                <td><a href="{{route('class.destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+                <td><a  onclick=" return confirm('Are you sure you want to delete?')" href="{{route('class.destroy', $class['id'])}}">Delete</a></td>
+                <td>
+                  <form action="{{ route('delete.form', $class['id'])}}" method="post">
+                  @csrf
+                   @method('DELETE')
+                  <input type="hidden" name="id"  onclick=" return confirm('Are you sure you want to delete?')" value="{{ $class->id }}">
+                  <input type="submit" value="delete">
+                  </form>
+                  </td>
+                  
               </tr>
             @endforeach
             
