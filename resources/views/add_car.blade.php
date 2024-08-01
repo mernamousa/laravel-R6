@@ -24,7 +24,7 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
-        <form action="{{route('cars.store')}}" method="POST" class="px-md-5">
+        <form action="{{route('cars.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
             @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
@@ -40,6 +40,15 @@
             <div class="col-md-10">
               <input type="text" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
               @error('price')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="image" class="form-label col-md-2 fw-bold text-md-end">Image:</label>
+            <div class="col-md-10">
+              <input type="file" name="image" id="image" value="{{old('image')}}"/>
+              @error('image')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
