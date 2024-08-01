@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
-
+use App\Http\Controllers\ExampleController;
 
 Route::prefix('cars')->group(function () {
 Route::get('create', [CarController::class,'create'])->name('cars.create');
@@ -35,6 +35,8 @@ Route::delete('forceDelete/{id}', [ClassController::class,'forceDelete'])->name(
 
 
 
+Route::get('upload', [ExampleController::class,'upload'])->name('upload');
+Route::post('upload', [ExampleController::class,'uploadImage'])->name('upload.image');
 
 
 
