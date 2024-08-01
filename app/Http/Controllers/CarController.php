@@ -70,14 +70,12 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data =[
-            'carTitle' => $request->carTitle,
-            'price' => $request->price,
-            'description'=> $request->description ,
-            'published'=> $request->has('published'),
-           // 'published'=> isset($request->published),
-  
-         ];
+        $data =$request->validate([
+            'carTitle' =>'required|string',
+            'description' =>'required|string|max:1000',
+            'price'=>'required|decimal:1',
+          ]);
+          $data['published']=$request->has('published');
     
             Car::where('id',$id)->update($data);
     
