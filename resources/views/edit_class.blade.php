@@ -24,7 +24,7 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Class</h2>
-        <form action="{{route('class.update',$class->id)}}" method="POST" class="px-md-5">
+        <form action="{{route('class.update',$class->id)}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf
           @method('put')
           <div class="form-group mb-3 row">
@@ -57,6 +57,20 @@
               <input type="time"  placeholder="Time To" class="form-control py-2" name="timeTo" value="{{$class->timeTo}}"/>
             </div>
           </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+        <div class="mb-3">
+            @if($class->image)
+            <img src="{{ asset('assets/images/' .$class->image) }}"  class="img-thumbnail" style="width: 100px;">
+            @else
+            No Image
+            @endif
+            @error('image')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+        </div>
           
           <hr>
           <div class="form-group mb-3 row">

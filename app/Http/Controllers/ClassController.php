@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
+use App\Traits\Common;
 
 class ClassController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +36,11 @@ class ClassController extends Controller
             'price' =>'required|decimal:1',
             'timeFrom' =>'required',
             'timeTo'=>'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+
           ]);
+         
+        $data['image']=$this->uploadFile($request->image, 'assets/images');
           $data['isFulled']=$request->has('isFulled');
 
         ClassModel::create($data);
@@ -71,7 +77,11 @@ class ClassController extends Controller
             'price' =>'required|decimal:1',
             'timeFrom' =>'required',
             'timeTo'=>'required',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif'
           ]);
+          if($request->hasFile('image')){
+            $data['image']=$this->uploadFile($request->image, 'assets/images');
+          }
           $data['isFulled']=$request->has('isFulled');
     
          ClassModel::where('id',$id)->update($data);
