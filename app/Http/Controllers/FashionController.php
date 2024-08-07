@@ -21,6 +21,9 @@ class FashionController extends Controller
         $products =Fashion::latest()->take(3)->get();
         return view('index', compact('products'));
     }
+    public function about(){
+        return view('about');
+    }
     public function create()
     {
         return view('add_product');

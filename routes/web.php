@@ -43,6 +43,7 @@ Route::post('upload', [ExampleController::class,'uploadImage'])->name('upload.im
 Route::get('index', [FashionController::class,'index'])->name('index');
 Route::get('create', [FashionController::class,'create'])->name('fashion.create');
 Route::post('store', [FashionController::class,'store'])->name('fashion.store');
+Route::get('about', [FashionController::class,'about'])->name('fashion.about');
 
 
 
