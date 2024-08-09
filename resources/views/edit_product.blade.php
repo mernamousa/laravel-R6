@@ -67,7 +67,7 @@
         </div>
         <div class="mb-3">
             @if($product->image)
-            <img src="{{ asset('asset/images/products' .$product->image)}}"  class="img-thumbnail" style="width: 100px;">
+            <img src="{{ asset('asset/images/products'.$product->image)}}"  class="img-thumbnail" style="width: 100px;">
             @else
             No Image
             @endif
