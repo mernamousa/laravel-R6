@@ -21,9 +21,11 @@ class FashionController extends Controller
         $products =Fashion::latest()->take(3)->get();
         return view('index', compact('products'));
     }
+
     public function about(){
         return view('about');
     }
+
     public function create()
     {
         return view('add_product');
@@ -40,7 +42,7 @@ class FashionController extends Controller
             'price'=>'required|decimal:1',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
-        $data['image']=$this->uploadFile($request->image, 'assets/images');
+        $data['image']=$this->uploadFile($request->image, 'asset/images');
         $data['published']=$request->has('published');
         
         Fashion::create($data);
@@ -53,6 +55,11 @@ class FashionController extends Controller
     /**
      * Display the specified resource.
      */
+    public function showAll()
+    {
+        $products = Fashion::get();
+        return view('products', compact('products'));
+    }
     public function show(string $id)
     {
         
@@ -63,7 +70,8 @@ class FashionController extends Controller
      */
     public function edit(string $id)
     {
-       
+        $product = Fashion::findOrFail($id);
+        return view('edit_product', compact('product'));
     }
 
     /**
@@ -71,7 +79,20 @@ class FashionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $data =$request->validate([
+            'productName' =>'required|string',
+            'description' =>'required|string|max:1000',
+            'price'=>'required|decimal:1',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+        ]);
+        if($request->hasFile('image')){
+            $data['image']=$this->uploadFile($request->image, 'asset/images/products');
+          }
+          $data['published']=$request->has('published');
+    
+          Fashion::where('id',$id)->update($data);
+    
+         return redirect()->route('fashion.showAll');  
     }
 
     /**
