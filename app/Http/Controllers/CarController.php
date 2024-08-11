@@ -33,7 +33,7 @@ class CarController extends Controller
         $data =$request->validate([
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
-            'price'=>'required|decimal:1',
+            'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         $imageName = time().'.'.$request->image->extension();
@@ -74,7 +74,7 @@ class CarController extends Controller
         $data =$request->validate([
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
-            'price'=>'required|decimal:1',
+            'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
           ]);
           if($request->image != ''){        

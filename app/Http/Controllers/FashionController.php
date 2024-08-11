@@ -39,7 +39,7 @@ class FashionController extends Controller
           $data =$request->validate([
             'productName' =>'required|string',
             'description' =>'required|string|max:1000',
-            'price'=>'required|decimal:1',
+            'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         $data['image']=$this->uploadFile($request->image, 'asset/images');
@@ -82,7 +82,7 @@ class FashionController extends Controller
         $data =$request->validate([
             'productName' =>'required|string',
             'description' =>'required|string|max:1000',
-            'price'=>'required|decimal:1',
+            'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
         if($request->hasFile('image')){

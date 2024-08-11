@@ -33,7 +33,7 @@ class ClassController extends Controller
         $data =$request->validate([
             'className' =>'required|string|max:255',
             'capacity' =>'required|numeric',
-            'price' =>'required|decimal:1',
+            'price' =>'required|decimal:2',
             'timeFrom' =>'required',
             'timeTo'=>'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
@@ -74,7 +74,7 @@ class ClassController extends Controller
         $data =$request->validate([
             'className' =>'required|string|max:255',
             'capacity' =>'required|numeric',
-            'price' =>'required|decimal:1',
+            'price' =>'required|decimal:2',
             'timeFrom' =>'required',
             'timeTo'=>'required',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif'
