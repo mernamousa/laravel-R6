@@ -18,5 +18,6 @@ class ClassModel extends Model
         'price',     //float
         'timeFrom',  //time
         'timeTo',   //time
+        'image',   //nullable
     ];
 }

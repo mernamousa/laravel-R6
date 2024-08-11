@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\FashionController;
 
 Route::prefix('cars')->group(function () {
 Route::get('create', [CarController::class,'create'])->name('cars.create');
@@ -39,5 +40,14 @@ Route::get('upload', [ExampleController::class,'upload'])->name('upload');
 Route::post('upload', [ExampleController::class,'uploadImage'])->name('upload.image');
 
 
+Route::get('index', [FashionController::class,'index'])->name('index');
+Route::get('create', [FashionController::class,'create'])->name('fashion.create');
+Route::post('store', [FashionController::class,'store'])->name('fashion.store');
+Route::get('about', [FashionController::class,'about'])->name('fashion.about');
+Route::get('showAll', [FashionController::class,'showAll'])->name('fashion.showAll');
+Route::get('edit/{id}', [FashionController::class,'edit'])->name('fashion.edit');
+Route::put('update/{id}', [FashionController::class,'update'])->name('fashion.update');
+Route::get('show/{id}', [FashionController::class,'show'])->name('fashion.show');
+Route::get('delete/{id}', [FashionController::class,'destroy'])->name('fashion.destroy');
 
 

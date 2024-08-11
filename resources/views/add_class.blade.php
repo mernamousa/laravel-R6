@@ -24,36 +24,60 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('class.store')}}" method="POST" class="px-md-5">
+        <form action="{{route('class.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
             @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class Name:</label>
             <div class="col-md-10">
               <input type="text" placeholder="class Name" class="form-control py-2" name="className"/>
+              @error('className')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
               <input type="number" placeholder="capacity" class="form-control py-2" name="capacity"/>
+              @error('capacity')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
               <input type="text"  placeholder="Enter price" class="form-control py-2" name="price"/>
+              @error('price')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
             <div class="col-md-10">
               <input type="time"  placeholder="Time From" class="form-control py-2" name="timeFrom"/>
+              @error('timeFrom')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
               <input type="time"  placeholder="Time To" class="form-control py-2" name="timeTo"/>
+              @error('timeTo')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="image" class="form-label col-md-2 fw-bold text-md-end">Image:</label>
+            <div class="col-md-10">
+              <input type="file" name="image" id="image" value="{{old('image')}}"/>
+              @error('image')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           

@@ -31,19 +31,20 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $data =$request->validate([
-          'carTitle' =>'required|string',
-          'description' =>'required|string|max:1000',
-          'price'=>'required|decimal:1',
+            'carTitle' =>'required|string',
+            'description' =>'required|string|max:1000',
+            'price'=>'required|decimal:2',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $data['image'] = 'images/'.$imageName;
         $data['published']=$request->has('published');
+        
+        Car::create($data);
+        return redirect()->route('cars.index'); 
 
-       //dd($data);
-  
-          Car::create($data);
-  
-          return redirect()->route('cars.index'); 
-
-
+          //dd($data);
 
     }
 
@@ -73,8 +74,24 @@ class CarController extends Controller
         $data =$request->validate([
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
-            'price'=>'required|decimal:1',
+            'price'=>'required|decimal:2',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
           ]);
+          if($request->image != ''){        
+            $path = public_path().'/uploads/images/';
+  
+            //code for remove old file
+            if($data['image'] != ''  && $data['image'] != null){
+                 $file_old = $path.$data['image'];
+                 unlink($file_old);
+            }
+  
+            //upload new file
+            $image = $request->image;
+            $filename = $image->getClientOriginalName();
+            $image->move($path, $filename);
+       }
+
           $data['published']=$request->has('published');
     
             Car::where('id',$id)->update($data);
