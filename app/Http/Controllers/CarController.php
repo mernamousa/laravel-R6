@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Car;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,7 +23,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories =Category::select('id','categoryName')->get();
+        return view('add_car',compact('categories'));
     }
 
     /**
@@ -34,7 +36,8 @@ class CarController extends Controller
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'category_id' =>'required',
         ]);
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -62,8 +65,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+        $categories =Category::select('id','categoryName')->get();
         $car = Car::findOrFail($id);
-        return view('edit_car', compact('car'));
+        return view('edit_car', compact('car','categories'));
     }
 
     /**
@@ -75,16 +79,17 @@ class CarController extends Controller
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'category_id' =>'required'
           ]);
           if($request->image != ''){        
             $path = public_path().'/uploads/images/';
   
             //code for remove old file
-            if($data['image'] != ''  && $data['image'] != null){
+            /* if($data['image'] != ''  && $data['image'] != null){
                  $file_old = $path.$data['image'];
                  unlink($file_old);
-            }
+            } */
   
             //upload new file
             $image = $request->image;
