@@ -86,7 +86,7 @@
         </div>
         <div class="mb-3">
             @if($car->image)
-            <img src="{{ asset($car->image)}}"  class="img-thumbnail" style="width: 100px;">
+            <img src="{{ asset('assets/images/' .$car->image)}}"  class="img-thumbnail" style="width: 100px;">
             @else
             No Image
             @endif
