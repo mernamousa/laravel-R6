@@ -37,6 +37,8 @@ Route::delete('forceDelete/{id}', [ClassController::class,'forceDelete'])->name(
 
 
 Route::get('upload', [ExampleController::class,'upload'])->name('upload');
+Route::get('test', [ExampleController::class,'test'])->name('test');
+Route::get('testdb', [ExampleController::class,'testdb'])->name('testdb');
 Route::post('upload', [ExampleController::class,'uploadImage'])->name('upload.image');
 
 

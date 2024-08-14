@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExampleController extends Controller
 {
@@ -16,6 +18,17 @@ class ExampleController extends Controller
         $path = 'asset/images';
         $request->image->move($path, $file_name);
         return 'Uploaded';
+    }
+
+    public function test(){
+        dd(Student::find(1), Student::find(1)->phone);
+    }
+
+    public function testdb(){
+        dd(DB::table('students')
+        ->join('phones', 'phones.id', '=', 'students.phone_id')
+        ->where('students.id', '=', 1)
+        ->first());
     }
 
     

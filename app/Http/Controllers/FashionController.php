@@ -42,7 +42,7 @@ class FashionController extends Controller
             'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif'
         ]);
-        $data['image']=$this->uploadFile($request->image, 'asset/images');
+        $data['image']=$this->uploadFile($request->image, 'asset/images/products');
         $data['published']=$request->has('published');
         
         Fashion::create($data);
@@ -83,7 +83,7 @@ class FashionController extends Controller
             'productName' =>'required|string',
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif'
         ]);
         if($request->hasFile('image')){
             $data['image']=$this->uploadFile($request->image, 'asset/images/products');

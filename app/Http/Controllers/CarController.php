@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Models\Car;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +25,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories =Category::select('id','categoryName')->get();
+        return view('add_car',compact('categories'));
     }
 
     /**
@@ -34,11 +38,10 @@ class CarController extends Controller
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'category_id' =>'required',
         ]);
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $data['image'] = 'images/'.$imageName;
+        $data['image']=$this->uploadFile($request->image, 'assets/images');
         $data['published']=$request->has('published');
         
         Car::create($data);
@@ -62,8 +65,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+        $categories =Category::select('id','categoryName')->get();
         $car = Car::findOrFail($id);
-        return view('edit_car', compact('car'));
+        return view('edit_car', compact('car','categories'));
     }
 
     /**
@@ -75,23 +79,13 @@ class CarController extends Controller
             'carTitle' =>'required|string',
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'category_id' =>'required'
           ]);
-          if($request->image != ''){        
-            $path = public_path().'/uploads/images/';
-  
-            //code for remove old file
-            if($data['image'] != ''  && $data['image'] != null){
-                 $file_old = $path.$data['image'];
-                 unlink($file_old);
-            }
-  
-            //upload new file
-            $image = $request->image;
-            $filename = $image->getClientOriginalName();
-            $image->move($path, $filename);
-       }
-
+          
+          if($request->hasFile('image')){
+            $data['image']=$this->uploadFile($request->image, 'assets/images');
+          }
           $data['published']=$request->has('published');
     
             Car::where('id',$id)->update($data);
