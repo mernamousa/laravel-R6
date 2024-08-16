@@ -31,5 +31,8 @@ class ExampleController extends Controller
         ->first());
     }
 
+    public function contactus(){
+        return view('contactus');
+    }
     
 }

@@ -51,12 +51,12 @@
                 <option value="">Select Category</option>
                 @if(!empty($categories))
                 @foreach ($categories as $category)
-                <option  value="{{$category->id}}">{{$category->categoryName}}</option>
+                <option  value="{{$category->id}}" @selected(old('category_id')== $category->id)>{{$category->categoryName}}</option>
                 @endforeach
                 @endif
                 
               </select>
-              @error('categoryName')
+              @error('category_id')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>

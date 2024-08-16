@@ -5,8 +5,13 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\FashionController;
+use Illuminate\Auth\Events\Verified;
 
-Route::prefix('cars')->group(function () {
+Route::get('', function () {
+    return view('welcome');
+});
+
+Route::prefix('cars')->middleware('verified')->group(function () {
 Route::get('create', [CarController::class,'create'])->name('cars.create');
 Route::post('store', [CarController::class,'store'])->name('cars.store');
 Route::get('index', [CarController::class,'index'])->name('cars.index');
@@ -52,4 +57,8 @@ Route::put('update/{id}', [FashionController::class,'update'])->name('fashion.up
 Route::get('show/{id}', [FashionController::class,'show'])->name('fashion.show');
 Route::get('delete/{id}', [FashionController::class,'destroy'])->name('fashion.destroy');
 
+Route::get('contactus',[ExampleController::class,'contactus']);
 
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
