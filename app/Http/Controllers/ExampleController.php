@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailgunEmail;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
 {
@@ -33,6 +35,12 @@ class ExampleController extends Controller
 
     public function contactus(){
         return view('contactus');
+    }
+
+    public function sendmsg(Request $request){
+      // return $data =$request->all();
+        Mail::to('mernamousa209@gmail.com')->send(new MailgunEmail('hello'));
+        return 'mail has sent';
     }
     
 }

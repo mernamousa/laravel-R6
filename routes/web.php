@@ -58,6 +58,7 @@ Route::get('show/{id}', [FashionController::class,'show'])->name('fashion.show')
 Route::get('delete/{id}', [FashionController::class,'destroy'])->name('fashion.destroy');
 
 Route::get('contactus',[ExampleController::class,'contactus']);
+Route::post('sendmsg',[ExampleController::class,'sendmsg'])->name('sendmsg');
 
 Auth::routes(['verify' => true]);
 
