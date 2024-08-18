@@ -24,19 +24,20 @@ class MailgunEmail extends Mailable
     }
 
     public function build(){
-         return $this->subject('please check')->view('contactus')->with('data',$this->data);
+         return $this->subject('please check')->view('mail.mail')->with('data',$this->data);
     }
 
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    /* public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mailgun Email',
+            from: new Address('mernamousa209@gmail.com', 'merna mousa'),
+            subject: 'Order Shipped',
         );
-    }
+    } */
 
     /**
      * Get the message content definition.
@@ -44,7 +45,7 @@ class MailgunEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.mailgun',
+            view: 'mail.mail',
         );
     }
 

@@ -38,9 +38,9 @@ class ExampleController extends Controller
     }
 
     public function sendmsg(Request $request){
-      // return $data =$request->all();
-        Mail::to('mernamousa209@gmail.com')->send(new MailgunEmail('hello'));
-        return 'mail has sent';
+       $data =$request->except('_token');
+      Mail::to($request->input('email'))->send(new MailgunEmail($data));
+        return view('mail.mail',compact('data'));
     }
     
 }
