@@ -34,8 +34,16 @@ return [
     |            "failover", "roundrobin"
     |
     */
+    
+
 
     'mailers' => [
+        'mailgun' => [
+         'transport' => 'mailgun',
+            // 'client' => [
+             //     'timeout' => 5,
+            // ],
+        ],
 
         'smtp' => [
             'transport' => 'smtp',
@@ -108,9 +116,14 @@ return [
     |
     */
 
-    'from' => [
+    /* 'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
+    ], */
+    'from' => [
+    'address' => env('MAIL_FROM_ADDRESS', 'mernamousa209@gmail.com'),
+    'name' => env('MAIL_FROM_NAME', 'merna mousa'),
     ],
 
+    'reply_to' => ['address' => 'example@example.com', 'name' => 'App Name'],
 ];

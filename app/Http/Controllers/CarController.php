@@ -16,7 +16,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::get();
+        $cars = Car::with('category')->get();
         return view('cars', compact('cars'));
     }
 
@@ -56,7 +56,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        $car = Car::findOrFail($id);
+        $car = Car::with('category')->findOrFail($id);
+        //dd($car->category->categoryName);
         return view('car_details', compact('car'));
     }
 
@@ -80,7 +81,7 @@ class CarController extends Controller
             'description' =>'required|string|max:1000',
             'price'=>'required|decimal:2',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'category_id' =>'required'
+            'category_id' =>'required|exists:categories,id'
           ]);
           
           if($request->hasFile('image')){

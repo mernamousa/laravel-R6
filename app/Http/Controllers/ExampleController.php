@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailgunEmail;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
 {
@@ -31,5 +33,14 @@ class ExampleController extends Controller
         ->first());
     }
 
+    public function contactus(){
+        return view('contactus');
+    }
+
+    public function sendmsg(Request $request){
+       $data =$request->except('_token');
+      Mail::to($request->input('email'))->send(new MailgunEmail($data));
+        return view('mail.mail',compact('data'));
+    }
     
 }
