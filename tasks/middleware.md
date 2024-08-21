@@ -25,4 +25,5 @@ Middleware is a powerful feature of Laravel that helps in organizing and managin
 <h3>Creating Middleware</h3>
 <p>php artisan make:middleware ExampleMiddleware</p>
 </body>
+
 </html>
