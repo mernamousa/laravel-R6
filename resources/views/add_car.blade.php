@@ -23,7 +23,10 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
+        <html lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">{{__('cars.addHeading')}}</h2>
         <form action="{{route('cars.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
             @csrf
           <div class="form-group mb-3 row">
