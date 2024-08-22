@@ -24,34 +24,34 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <html lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
-        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
-        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">{{__('cars.English')}} </a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">{{__('cars.Arabic')}}</a>
         <h2 class="fw-bold fs-2 mb-5 pb-2">{{__('cars.addHeading')}}</h2>
         <form action="{{route('cars.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
             @csrf
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.CarTitle')}}:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
+              <input type="text" placeholder="{{__('cars.ExampleBmw')}}" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
               @error('carTitle')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.Price')}}:</label>
             <div class="col-md-10">
-              <input type="text" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
+              <input type="text" step="0.1" placeholder="{{__('cars.EntrePrice')}}" class="form-control py-2" name="price" value="{{old('price')}}"/>
               @error('price')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.Category')}}:</label>
             <div class="col-md-10">
               <select name="category_id" id="" class="form-control">
-                <option value="">Select Category</option>
+                <option value="">{{__('cars.SelectCategory')}}</option>
                 @if(!empty($categories))
                 @foreach ($categories as $category)
                 <option  value="{{$category->id}}" @selected(old('category_id')== $category->id)>{{$category->categoryName}}</option>
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="image" class="form-label col-md-2 fw-bold text-md-end">Image:</label>
+            <label for="image" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.Image')}}:</label>
             <div class="col-md-10">
               <input type="file" name="image" id="image" value="{{old('image')}}"/>
               @error('image')
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.Description')}}:</label>
             <div class="col-md-10">
               <textarea  id="" cols="30" rows="5" class="form-control py-2" name="description">{{old('description')}}</textarea>
             @error('description')
@@ -84,7 +84,7 @@
           </div>
           <hr>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{__('cars.Published')}}:</label>
             <div class="col-md-10">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))/>
               @error('published')
