@@ -189,7 +189,7 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-
+    //attributes
     'attributes' => [
         'carTitle'=>'اسم السيارة',
         'price' => 'السعر',
