@@ -34,6 +34,7 @@ class ExampleController extends Controller
     }
 
     public function contactus(){
+        session()->put('test', 'First Laravel session');
         return view('contactus');
     }
 

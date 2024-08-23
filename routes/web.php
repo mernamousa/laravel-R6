@@ -10,19 +10,28 @@ use Illuminate\Auth\Events\Verified;
 Route::get('', function () {
     return view('welcome');
 });
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+        Route::prefix('cars')->middleware('verified')->group(function () {
+        Route::get('create', [CarController::class,'create'])->name('cars.create');
+        Route::post('store', [CarController::class,'store'])->name('cars.store');
+        Route::get('index', [CarController::class,'index'])->name('cars.index');
+        Route::get('edit/{id}', [CarController::class,'edit'])->name('cars.edit');
+        Route::put('update/{id}', [CarController::class,'update'])->name('cars.update');
+        Route::get('show/{id}', [CarController::class,'show'])->name('cars.show');
+        Route::get('delete/{id}', [CarController::class,'destroy'])->name('cars.destroy');
+        Route::get('showDeleted', [CarController::class,'showDeleted'])->name('cars.showDeleted');
+        Route::patch('restore/{id}', [CarController::class,'restore'])->name('cars.restore');
+        Route::delete('forceDelete/{id}', [CarController::class,'forceDelete'])->name('cars.forceDelete');
+        
+        
+        
+        });
+    });
 
-Route::prefix('cars')->middleware('verified')->group(function () {
-Route::get('create', [CarController::class,'create'])->name('cars.create');
-Route::post('store', [CarController::class,'store'])->name('cars.store');
-Route::get('index', [CarController::class,'index'])->name('cars.index');
-Route::get('edit/{id}', [CarController::class,'edit'])->name('cars.edit');
-Route::put('update/{id}', [CarController::class,'update'])->name('cars.update');
-Route::get('show/{id}', [CarController::class,'show'])->name('cars.show');
-Route::get('delete/{id}', [CarController::class,'destroy'])->name('cars.destroy');
-Route::get('showDeleted', [CarController::class,'showDeleted'])->name('cars.showDeleted');
-Route::patch('restore/{id}', [CarController::class,'restore'])->name('cars.restore');
-Route::delete('forceDelete/{id}', [CarController::class,'forceDelete'])->name('cars.forceDelete');
-});
 
 Route::prefix('class')->group(function () {
 Route::get('create', [ClassController::class,'create'])->name('class.create');
