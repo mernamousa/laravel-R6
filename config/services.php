@@ -13,6 +13,10 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+   /*  GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET= */
+
+
 
     'mailgun' => [
     'domain' => env('MAILGUN_DOMAIN'),
@@ -41,5 +45,13 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+
+
+    'github' => [
+    'client_id' => env('GITHUB_CLIENT_ID'),
+    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+    'redirect' => 'http://localhost:8000/auth/github/callback',
+    ],
+
 
 ];
