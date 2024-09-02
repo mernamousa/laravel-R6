@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\FashionController;
+use App\Http\Controllers\SocialController;
 use Illuminate\Auth\Events\Verified;
 
 Route::get('', function () {
@@ -72,3 +73,6 @@ Route::post('sendmsg',[ExampleController::class,'sendmsg'])->name('sendmsg');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('auth/github/redirect', [SocialController::class, 'redirect'])->name('socialLogin');
+Route::get('auth/github/callback', [SocialController::class, 'callback']);
